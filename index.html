@@ -6,32 +6,38 @@
   <title>LilloCuts Barber Shop</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* 🎡 ستايل العجلة */
+    /* ===== العجلة ===== */
+    .wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: auto;
+    }
     .wheel {
-      width: 350px;
-      height: 350px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
+      border: 5px solid #333;
       position: relative;
       overflow: hidden;
-      border: 6px solid #111;
-      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+      transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
     }
     .wheel img {
       position: absolute;
       width: 50%;
       height: 50%;
       object-fit: cover;
-      transform-origin: bottom right;
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      transform-origin: 100% 100%;
+      transition: transform 0.5s ease;
     }
-    /* ✨ أنيميشن الصورة اللي وقفت عليها */
-    .active-img {
-      transform: scale(1.2) rotate(0deg) !important;
+    .highlighted {
+      transform: scale(1.2) !important;
       box-shadow: 0 0 25px gold;
+      border-radius: 12px;
       z-index: 10;
     }
-    /* 🔻 السهم */
-    .pointer {
+    /* ===== السهم الثابت ===== */
+    .arrow {
       position: absolute;
       top: -25px;
       left: 50%;
@@ -40,110 +46,106 @@
       height: 0; 
       border-left: 20px solid transparent;
       border-right: 20px solid transparent;
-      border-bottom: 40px solid red;
+      border-bottom: 30px solid red;
       z-index: 20;
     }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
-  <!-- ✅ NAVBAR -->
-  <header class="bg-black text-white p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold">LilloCuts</h1>
-    <nav class="space-x-4">
-      <a href="#about" class="hover:text-yellow-400">About</a>
-      <a href="#services" class="hover:text-yellow-400">Services</a>
-      <a href="#wheel" class="hover:text-yellow-400">Wheel</a>
-      <a href="#gallery" class="hover:text-yellow-400">Gallery</a>
-      <a href="#contact" class="hover:text-yellow-400">Contact</a>
-    </nav>
-  </header>
+  <!-- Header -->
+  <header class="bg-black text-white p-6 text-center text-2xl font-bold">LilloCuts Barber Shop</header>
 
-  <!-- ✅ HERO -->
-  <section class="h-screen bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('https://i.postimg.cc/4yJTy9zP/Screenshot-2025-08-25-at-18-34-26-Instagram.png');">
-    <div class="bg-black bg-opacity-60 p-8 rounded-2xl text-center">
-      <h2 class="text-5xl font-bold mb-4">Welcome to LilloCuts</h2>
-      <p class="text-lg">Where Style Meets Precision ✂️</p>
+  <!-- Hero -->
+  <section class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://i.postimg.cc/6qsymYx3/Screenshot-2025-08-25-at-18-35-11-Instagram.png');">
+    <h1 class="text-white text-5xl font-bold bg-black bg-opacity-50 p-6 rounded-xl">Welcome to LilloCuts</h1>
+  </section>
+
+  <!-- Services -->
+  <section class="py-16 text-center">
+    <h2 class="text-4xl font-bold mb-8">Our Services</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+      <div class="p-6 bg-white rounded-2xl shadow">✂️ Haircuts</div>
+      <div class="p-6 bg-white rounded-2xl shadow">🧔 Beard Styling</div>
+      <div class="p-6 bg-white rounded-2xl shadow">💈 Shaving</div>
     </div>
   </section>
 
-  <!-- ✅ ABOUT -->
-  <section id="about" class="py-16 text-center">
-    <h2 class="text-3xl font-bold mb-4">About Us</h2>
-    <p class="max-w-2xl mx-auto text-lg">We are professional barbers dedicated to providing the best grooming services with passion and precision.</p>
-  </section>
-
-  <!-- ✅ SERVICES -->
-  <section id="services" class="py-16 bg-gray-200 text-center">
-    <h2 class="text-3xl font-bold mb-8">Our Services</h2>
-    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-      <div class="p-6 bg-white rounded-2xl shadow">✂️ Haircut</div>
-      <div class="p-6 bg-white rounded-2xl shadow">🧔 Beard Trim</div>
-      <div class="p-6 bg-white rounded-2xl shadow">💈 Styling</div>
-    </div>
-  </section>
-
-  <!-- ✅ WHEEL GAME -->
-  <section id="wheel" class="py-20 text-center bg-white">
-    <h2 class="text-3xl font-bold mb-8">🎡 Spin the Wheel</h2>
-    <div class="relative mx-auto" style="width: 350px; height: 350px;">
-      <!-- 🔻 السهم -->
-      <div class="pointer"></div>
-      <!-- 🎡 العجلة -->
-      <div id="wheel" class="wheel mx-auto">
-        <!-- 📌 غير الروابط دي لو عاوز تبدل الصور -->
-        <img src="https://i.postimg.cc/kMNGfNGj/Screenshot-2025-08-25-at-18-37-07-Instagram.png" style="transform: rotate(0deg);">
-        <img src="https://i.postimg.cc/BnRJqttL/Screenshot-2025-08-25-at-18-36-40-Instagram.png" style="transform: rotate(45deg);">
-        <img src="https://i.postimg.cc/kXBrB90x/Screenshot-2025-08-25-at-18-36-11-Instagram.png" style="transform: rotate(90deg);">
-        <img src="https://i.postimg.cc/MGRfwCZw/Screenshot-2025-08-25-at-18-35-33-Instagram.png" style="transform: rotate(135deg);">
-        <img src="https://i.postimg.cc/Wp7WjKt0/Screenshot-2025-08-25-at-18-35-26-Instagram.png" style="transform: rotate(180deg);">
-        <img src="https://i.postimg.cc/6qsymYx3/Screenshot-2025-08-25-at-18-35-11-Instagram.png" style="transform: rotate(225deg);">
-        <img src="https://i.postimg.cc/4yJTy9zP/Screenshot-2025-08-25-at-18-34-26-Instagram.png" style="transform: rotate(270deg);">
-        <img src="https://i.postimg.cc/FHncxbzf/Screenshot-2025-08-25-at-18-33-57-Instagram.png" style="transform: rotate(315deg);">
+  <!-- Portfolio (Barbers) -->
+  <section class="py-16 bg-gray-200 text-center">
+    <h2 class="text-4xl font-bold mb-8">Meet Our Barbers</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <img src="https://i.postimg.cc/FHncxbzf/Screenshot-2025-08-25-at-18-33-57-Instagram.png" class="rounded-xl mb-4">
+        <h3 class="font-bold text-xl">Lillo</h3>
+        <p>Fade Specialist</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <img src="https://i.postimg.cc/4yJTy9zP/Screenshot-2025-08-25-at-18-34-26-Instagram.png" class="rounded-xl mb-4">
+        <h3 class="font-bold text-xl">Marco</h3>
+        <p>Classic Cuts</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <img src="https://i.postimg.cc/kMNGfNGj/Screenshot-2025-08-25-at-18-37-07-Instagram.png" class="rounded-xl mb-4">
+        <h3 class="font-bold text-xl">Samir</h3>
+        <p>Modern Styles</p>
       </div>
     </div>
-    <button onclick="spinWheel()" class="mt-8 px-6 py-3 bg-yellow-500 text-white rounded-xl font-bold hover:bg-yellow-600">Spin</button>
   </section>
 
-  <!-- ✅ GALLERY -->
-  <section id="gallery" class="py-16 bg-gray-100 text-center">
-    <h2 class="text-3xl font-bold mb-8">Gallery</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-      <img src="https://i.postimg.cc/4yJTy9zP/Screenshot-2025-08-25-at-18-34-26-Instagram.png" class="rounded-xl shadow">
-      <img src="https://i.postimg.cc/FHncxbzf/Screenshot-2025-08-25-at-18-33-57-Instagram.png" class="rounded-xl shadow">
-      <img src="https://i.postimg.cc/Wp7WjKt0/Screenshot-2025-08-25-at-18-35-26-Instagram.png" class="rounded-xl shadow">
-      <img src="https://i.postimg.cc/kMNGfNGj/Screenshot-2025-08-25-at-18-37-07-Instagram.png" class="rounded-xl shadow">
+  <!-- العجلة -->
+  <section class="py-16 text-center">
+    <h2 class="text-4xl font-bold mb-8">Spin the Wheel!</h2>
+    <div class="wheel-container">
+      <div class="arrow"></div>
+      <div class="wheel" id="wheel">
+        <img src="https://i.postimg.cc/kMNGfNGj/Screenshot-2025-08-25-at-18-37-07-Instagram.png" style="transform: rotate(0deg) translate(0, -100%)">
+        <img src="https://i.postimg.cc/BnRJqttL/Screenshot-2025-08-25-at-18-36-40-Instagram.png" style="transform: rotate(45deg) translate(0, -100%)">
+        <img src="https://i.postimg.cc/kXBrB90x/Screenshot-2025-08-25-at-18-36-11-Instagram.png" style="transform: rotate(90deg) translate(0, -100%)">
+        <img src="https://i.postimg.cc/MGRfwCZw/Screenshot-2025-08-25-at-18-35-33-Instagram.png" style="transform: rotate(135deg) translate(0, -100%)">
+        <img src="https://i.postimg.cc/Wp7WjKt0/Screenshot-2025-08-25-at-18-35-26-Instagram.png" style="transform: rotate(180deg) translate(0, -100%)">
+        <img src="https://i.postimg.cc/6qsymYx3/Screenshot-2025-08-25-at-18-35-11-Instagram.png" style="transform: rotate(225deg) translate(0, -100%)">
+        <img src="https://i.postimg.cc/4yJTy9zP/Screenshot-2025-08-25-at-18-34-26-Instagram.png" style="transform: rotate(270deg) translate(0, -100%)">
+        <img src="https://i.postimg.cc/FHncxbzf/Screenshot-2025-08-25-at-18-33-57-Instagram.png" style="transform: rotate(315deg) translate(0, -100%)">
+      </div>
+    </div>
+    <button onclick="spin()" class="mt-6 px-6 py-3 bg-black text-white rounded-xl">Spin</button>
+  </section>
+
+  <!-- Gallery -->
+  <section class="py-16 bg-gray-100 text-center">
+    <h2 class="text-4xl font-bold mb-8">Gallery</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-6">
+      <img src="https://i.postimg.cc/BnRJqttL/Screenshot-2025-08-25-at-18-36-40-Instagram.png" class="rounded-xl">
+      <img src="https://i.postimg.cc/kXBrB90x/Screenshot-2025-08-25-at-18-36-11-Instagram.png" class="rounded-xl">
+      <img src="https://i.postimg.cc/MGRfwCZw/Screenshot-2025-08-25-at-18-35-33-Instagram.png" class="rounded-xl">
+      <img src="https://i.postimg.cc/Wp7WjKt0/Screenshot-2025-08-25-at-18-35-26-Instagram.png" class="rounded-xl">
     </div>
   </section>
 
-  <!-- ✅ CONTACT -->
-  <section id="contact" class="py-16 text-center bg-white">
-    <h2 class="text-3xl font-bold mb-8">Contact Us</h2>
-    <p class="mb-4">📍 Cairo, Egypt</p>
-    <p class="mb-4">📞 +20 123 456 789</p>
-    <p>📧 lillocuts@barber.com</p>
+  <!-- Contact -->
+  <section class="py-16 bg-gray-200 text-center">
+    <h2 class="text-4xl font-bold mb-8">Contact Us</h2>
+    <p>📍 Cairo, Egypt</p>
+    <p>📞 +20 123 456 789</p>
   </section>
 
-  <!-- ✅ FOOTER -->
-  <footer class="bg-black text-white p-6 text-center">
-    <p>© 2025 LilloCuts Barber Shop. All Rights Reserved.</p>
-  </footer>
+  <!-- Footer -->
+  <footer class="bg-black text-white text-center p-6">© 2025 LilloCuts Barber Shop</footer>
 
   <script>
-    let deg = 0;
-    function spinWheel() {
+    let currentRotation = 0;
+    function spin() {
       const wheel = document.getElementById("wheel");
-      const imgs = wheel.querySelectorAll("img");
-      imgs.forEach(img => img.classList.remove("active-img"));
-
-      // 🎡 عشوائي
-      const spins = Math.floor(Math.random() * 8);
-      deg += 360 * 3 + (spins * 45); // 3 لفات + اختيار صورة
-
-      wheel.style.transform = `rotate(${deg}deg)`;
+      const randomSpin = 360 * 5 + Math.floor(Math.random() * 360);
+      currentRotation += randomSpin;
+      wheel.style.transform = `rotate(${currentRotation}deg)`;
 
       setTimeout(() => {
-        const index = spins % 8;
-        imgs[index].classList.add("active-img");
+        const imgs = wheel.querySelectorAll("img");
+        imgs.forEach(img => img.classList.remove("highlighted"));
+        const degrees = currentRotation % 360;
+        const selectedIndex = Math.floor(((360 - degrees) % 360) / 45);
+        imgs[selectedIndex].classList.add("highlighted");
       }, 4000);
     }
   </script>
