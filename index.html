@@ -69,78 +69,92 @@
         0 0 50px currentColor;
     }
 
-    /* Carousel Styles */
-    .carousel-container {
+    /* ===== Wheel Styles (مضافة) ===== */
+    .wheel-wrap {
       position: relative;
-      width: 80%;
-      margin: auto;
-      overflow: hidden;
+      display: inline-block;
     }
-    .carousel {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-    .carousel img {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      margin: 0 10px;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .carousel img:hover {
-      transform: scale(1.05);
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #e63946;
-      border: none;
-      color: #fff;
-      padding: 15px;
-      font-size: 24px;
-      cursor: pointer;
+    #wheel {
+      position: relative;
+      width: min(82vw, 380px);
+      height: min(82vw, 380px);
       border-radius: 50%;
-      z-index: 10;
+      border: 4px solid #ff1a1a;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 26, 26, 0.4), inset 0 0 30px rgba(255, 26, 26, 0.15);
+      background: radial-gradient(circle at 50% 50%, #111 0%, #000 65%);
+      transition: transform 4s ease-out;
     }
-    .carousel-btn.prev { left: -50px; }
-    .carousel-btn.next { right: -50px; }
+    .slice {
+      position: absolute;
+      width: 50%;   /* ربع الدايرة قبل التحويلات */
+      height: 50%;
+      left: 0;
+      top: 0;
+      transform-origin: 100% 100%; /* مركز العجلة */
+      overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .slice img {
+      width: 200%;
+      height: 200%;
+      object-fit: cover;
+      filter: contrast(1.03) saturate(1.05);
+      transform-origin: 50% 50%;
+    }
+    /* Pointer */
+    .pointer {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 16px solid transparent;
+      border-right: 16px solid transparent;
+      border-bottom: 32px solid #ff1a1a;
+      filter: drop-shadow(0 0 6px #ff1a1a);
+      z-index: 5;
+    }
 
-    /* Modal Styles */
+    /* ===== Modal Styles (مضافة) ===== */
     .modal {
       display: none;
       position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
       z-index: 9999;
-      padding-top: 60px;
-      left: 0;
-      top: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-card {
+      background: #0b0b0b;
+      border: 2px solid #ff1a1a;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 26, 26, 0.25);
+      max-width: min(92vw, 720px);
       width: 100%;
-      height: 100%;
-      overflow: auto;
-      background: rgba(0,0,0,0.9);
+      padding: 18px;
+      text-align: center;
     }
-    .modal-content {
-      margin: auto;
-      display: block;
-      max-width: 80%;
-      max-height: 80%;
-      border-radius: 10px;
+    .modal-card img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: cover;
+      border-radius: 14px;
     }
-    .close {
+    .modal-close {
       position: absolute;
-      top: 20px;
-      right: 45px;
+      top: 14px;
+      right: 16px;
+      font-size: 28px;
       color: #fff;
-      font-size: 40px;
-      font-weight: bold;
       cursor: pointer;
+      line-height: 1;
     }
-    .close:hover {
-      color: #e63946;
-    }
+    .modal-close:hover { color: #ff1a1a; }
   </style>
 </head>
 <body class="bg-black text-white font-sans">
@@ -218,26 +232,37 @@
     </div>
   </section>
 
-  <!-- ✂️ Haircuts Carousel Section -->
-  <section class="haircuts bg-black text-center py-16">
-    <h2 class="text-3xl font-bold text-red-600 mb-10">جرب قصة جديدة ✂️</h2>
-    <div class="carousel-container">
-      <button class="carousel-btn prev">&#10094;</button>
-      <div class="carousel">
-        <img src="haircut1.jpg" alt="قصة شعر 1">
-        <img src="haircut2.jpg" alt="قصة شعر 2">
-        <img src="haircut3.jpg" alt="قصة شعر 3">
-        <img src="haircut4.jpg" alt="قصة شعر 4">
-        <img src="haircut5.jpg" alt="قصة شعر 5">
+  <!-- ===== Wheel Section (مضاف بعد Contact Us) ===== -->
+  <section class="py-16 px-6 bg-gradient-to-b from-black to-gray-900">
+    <h2 class="text-3xl font-bold text-center text-red-600 mb-2">جرب قصة جديدة ✂️</h2>
+    <p class="text-center text-gray-400 mb-8">اضغط على الزر علشان العجلة تلف والسهم يختار لك قصة</p>
+
+    <div class="flex flex-col items-center gap-6" data-aos="zoom-in" data-aos-duration="1000">
+      <div class="wheel-wrap">
+        <div class="pointer"></div>
+        <div id="wheel"></div>
       </div>
-      <button class="carousel-btn next">&#10095;</button>
+
+      <button id="spinBtn" class="px-8 py-3 rounded-full font-semibold neon-btn hover:scale-110">
+        لفّ العجلة
+      </button>
     </div>
   </section>
 
-  <!-- Fullscreen Modal -->
-  <div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modalImg">
+  <!-- ===== Modal (مضاف) ===== -->
+  <div id="resultModal" class="modal">
+    <div class="modal-card relative">
+      <span id="closeModal" class="modal-close">&times;</span>
+      <img id="resultImg" src="" alt="Selected Style">
+      <h3 class="text-xl font-bold text-red-500 mt-4">قصة مناسبة ليك ✨</h3>
+      <div class="mt-3">
+        <a href="https://wa.me/201145651307?text=عايز%20أحجز%20نفس%20القصة%20اللي%20ظهرت%20في%20العجلة"
+           target="_blank"
+           class="inline-flex items-center gap-2 px-6 py-2 rounded-full neon-btn hover:scale-105">
+          احجز القصة دي
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- Gallery -->
@@ -271,47 +296,81 @@
   <script>
     AOS.init();
 
-    // Carousel Logic
-    const carousel = document.querySelector('.carousel');
-    const images = document.querySelectorAll('.carousel img');
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
-    let index = 0;
+    // ===== Wheel Logic =====
+    const wheel = document.getElementById('wheel');
+    const spinBtn = document.getElementById('spinBtn');
+    const resultModal = document.getElementById('resultModal');
+    const resultImg = document.getElementById('resultImg');
+    const closeModal = document.getElementById('closeModal');
 
-    function showCarousel() {
-      carousel.style.transform = `translateX(${-index * 320}px)`; 
+    // صور القصات (الروابط اللي بعتها)
+    const pics = [
+      "https://i.postimg.cc/kMNGfNGj/Screenshot-2025-08-25-at-18-37-07-Instagram.png",
+      "https://i.postimg.cc/BnRJqttL/Screenshot-2025-08-25-at-18-36-40-Instagram.png",
+      "https://i.postimg.cc/kXBrB90x/Screenshot-2025-08-25-at-18-36-11-Instagram.png",
+      "https://i.postimg.cc/MGRfwCZw/Screenshot-2025-08-25-at-18-35-33-Instagram.png",
+      "https://i.postimg.cc/Wp7WjKt0/Screenshot-2025-08-25-at-18-35-26-Instagram.png",
+      "https://i.postimg.cc/6qsymYx3/Screenshot-2025-08-25-at-18-35-11-Instagram.png",
+      "https://i.postimg.cc/4yJTy9zP/Screenshot-2025-08-25-at-18-34-26-Instagram.png",
+      "https://i.postimg.cc/FHncxbzf/Screenshot-2025-08-25-at-18-33-57-Instagram.png"
+    ];
+
+    const n = pics.length;
+    const sliceAngle = 360 / n;
+
+    // بناء الشرائح داخل العجلة
+    pics.forEach((src, i) => {
+      const slice = document.createElement('div');
+      slice.className = 'slice';
+      // زاوية كل شريحة
+      slice.style.transform = `rotate(${i * sliceAngle}deg) skewY(${90 - sliceAngle}deg)`;
+
+      const img = document.createElement('img');
+      img.src = src;
+      // نرجّع الصورة للوضع الطبيعي بعد الـskew ونزبطها في نص الشريحة
+      img.style.transform = `skewY(-${90 - sliceAngle}deg) rotate(${sliceAngle/2}deg) scale(1.1)`;
+      slice.appendChild(img);
+
+      wheel.appendChild(slice);
+    });
+
+    let currentDeg = 0;
+    let spinning = false;
+
+    function openModal(src){
+      resultImg.src = src;
+      resultModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
     }
+    function closeIt(){
+      resultModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    closeModal.addEventListener('click', closeIt);
+    resultModal.addEventListener('click', (e) => { if(e.target === resultModal) closeIt(); });
 
-    prevBtn.addEventListener('click', () => {
-      index = (index > 0) ? index - 1 : images.length - 1;
-      showCarousel();
-    });
+    spinBtn.addEventListener('click', () => {
+      if (spinning) return;
+      spinning = true;
 
-    nextBtn.addEventListener('click', () => {
-      index = (index < images.length - 1) ? index + 1 : 0;
-      showCarousel();
-    });
+      // لفة كاملة 5 مرات + زاوية عشوائية
+      const extra = Math.floor(Math.random() * 360);
+      currentDeg += 360 * 5 + extra;
+      wheel.style.transition = 'transform 4s ease-out';
+      wheel.style.transform = `rotate(${currentDeg}deg)`;
 
-    // Modal Logic
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImg");
-    const closeBtn = document.querySelector(".close");
+      // نحسب النتيجة بعد الانتهاء
+      setTimeout(() => {
+        const actual = ((currentDeg % 360) + 360) % 360;
 
-    images.forEach(img => {
-      img.addEventListener("click", () => {
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-    });
+        // نحول اتجاه المؤشر (أعلى) للنظام الزاوي (يمين = 0°) بإضافة 90°
+        // ونزود نصف زاوية الشريحة علشان نلتقط مركز الشريحة
+        const theta = (360 - actual + 90) % 360;
+        const index = Math.floor(((theta + sliceAngle / 2) % 360) / sliceAngle) % n;
 
-    closeBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
+        openModal(pics[index]);
+        spinning = false;
+      }, 4050);
     });
   </script>
 </body>
