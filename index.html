@@ -68,6 +68,16 @@
         0 0 30px currentColor,
         0 0 50px currentColor;
     }
+
+    /* ===== Spin Wheel Styles ===== */
+    .wheel-container { position: relative; width: 320px; height: 320px; }
+    .wheel { width: 100%; height: 100%; border-radius: 50%; border: 6px solid #ff1a1a; transition: transform 4s cubic-bezier(.17,.67,.23,1.23); box-shadow: 0 0 30px rgba(255,26,26,.4), inset 0 0 20px rgba(255,26,26,.3); }
+    .wheel-labels { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+    .wheel-pointer { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 24px solid #ff1a1a; filter: drop-shadow(0 0 6px #ff1a1a); }
+    .label { position: absolute; font-size: 12px; width: 90px; text-align: center; transform-origin: 50% 165px; opacity: .9; }
+
+    /* subtle glow card */
+    .glow-card { box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 0 24px rgba(255,26,26,.18); }
   </style>
 </head>
 <body class="bg-black text-white font-sans">
@@ -82,6 +92,12 @@
       <h1 class="text-6xl font-extrabold mt-6 neon">LilloCuts</h1>
       <p class="text-xl mt-2 tracking-widest text-gray-300">Barber Shop</p>
       <p class="mt-4 text-gray-400 italic">Sharp Cuts, Sharp Looks ✂️</p>
+
+      <!-- Quick CTA -->
+      <div class="mt-8 flex items-center justify-center gap-4">
+        <a href="#portfolio" class="neon-btn px-5 py-2 rounded-full">Meet Our Barbers</a>
+        <a href="#spin" class="neon-btn px-5 py-2 rounded-full">Spin Your Style 🎡</a>
+      </div>
     </div>
   </section>
 
@@ -145,6 +161,65 @@
     </div>
   </section>
 
+  <!-- ===== Barber Portfolio ===== -->
+  <section id="portfolio" class="py-16 px-6 bg-black">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-red-600 mb-2">Barber Portfolio</h2>
+      <p class="text-center text-gray-400 mb-10">Choose your artist – each barber has a signature style.</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Barber Card: Lillo -->
+        <div class="glow-card rounded-2xl p-4 bg-gradient-to-b from-gray-900 to-black border border-gray-800" data-aos="fade-up">
+          <div class="flex items-center gap-4">
+            <img src="https://i.postimg.cc/mkR0D74r/Screenshot-2025-08-24-at-06-12-32-Instagram.png" class="w-20 h-20 object-cover rounded-full border-2 border-red-600" alt="Lillo">
+            <div>
+              <h3 class="text-xl font-semibold">Lillo</h3>
+              <p class="text-sm text-gray-400">Owner • Fade • Classic • Beard</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 mt-4">
+            <img src="https://i.postimg.cc/zDkpns5v/Screenshot-2025-08-24-at-05-45-21-Instagram.png" class="rounded-lg" alt="work1">
+            <img src="https://i.postimg.cc/sgMcC1WG/Screenshot-2025-08-24-at-05-43-04-Instagram.png" class="rounded-lg" alt="work2">
+            <img src="https://i.postimg.cc/DZPQPX9H/Screenshot-2025-08-24-at-05-41-31-Instagram.png" class="rounded-lg" alt="work3">
+          </div>
+          <a href="https://wa.me/201145651307?text=Hi%20I%20want%20to%20book%20with%20Lillo" target="_blank" class="mt-4 neon-btn px-4 py-2 rounded-full inline-flex items-center gap-2"><i class='bx bx-message-rounded-dots'></i> Book with Lillo</a>
+        </div>
+        <!-- Barber Card: Ahmed -->
+        <div class="glow-card rounded-2xl p-4 bg-gradient-to-b from-gray-900 to-black border border-gray-800" data-aos="fade-up" data-aos-delay="150">
+          <div class="flex items-center gap-4">
+            <img src="https://i.postimg.cc/SRQ6TKqs/Screenshot-2025-08-24-at-05-40-38-Instagram.png" class="w-20 h-20 object-cover rounded-full border-2 border-red-600" alt="Ahmed">
+            <div>
+              <h3 class="text-xl font-semibold">Ahmed</h3>
+              <p class="text-sm text-gray-400">Skin Fade • Buzz Cut • Beard Trim</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 mt-4">
+            <img src="https://i.postimg.cc/SRQ6TKqs/Screenshot-2025-08-24-at-05-40-38-Instagram.png" class="rounded-lg" alt="work1">
+            <img src="https://i.postimg.cc/zDkpns5v/Screenshot-2025-08-24-at-05-45-21-Instagram.png" class="rounded-lg" alt="work2">
+            <img src="https://i.postimg.cc/sgMcC1WG/Screenshot-2025-08-24-at-05-43-04-Instagram.png" class="rounded-lg" alt="work3">
+          </div>
+          <a href="https://wa.me/201145651307?text=Hi%20I%20want%20to%20book%20with%20Ahmed" target="_blank" class="mt-4 neon-btn px-4 py-2 rounded-full inline-flex items-center gap-2"><i class='bx bx-message-rounded-dots'></i> Book with Ahmed</a>
+        </div>
+        <!-- Barber Card: Omar -->
+        <div class="glow-card rounded-2xl p-4 bg-gradient-to-b from-gray-900 to-black border border-gray-800" data-aos="fade-up" data-aos-delay="300">
+          <div class="flex items-center gap-4">
+            <img src="https://i.postimg.cc/DZPQPX9H/Screenshot-2025-08-24-at-05-41-31-Instagram.png" class="w-20 h-20 object-cover rounded-full border-2 border-red-600" alt="Omar">
+            <div>
+              <h3 class="text-xl font-semibold">Omar</h3>
+              <p class="text-sm text-gray-400">Mohawk • Afro • Creative Styles</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 mt-4">
+            <img src="https://i.postimg.cc/sgMcC1WG/Screenshot-2025-08-24-at-05-43-04-Instagram.png" class="rounded-lg" alt="work1">
+            <img src="https://i.postimg.cc/SRQ6TKqs/Screenshot-2025-08-24-at-05-40-38-Instagram.png" class="rounded-lg" alt="work2">
+            <img src="https://i.postimg.cc/zDkpns5v/Screenshot-2025-08-24-at-05-45-21-Instagram.png" class="rounded-lg" alt="work3">
+          </div>
+          <a href="https://wa.me/201145651307?text=Hi%20I%20want%20to%20book%20with%20Omar" target="_blank" class="mt-4 neon-btn px-4 py-2 rounded-full inline-flex items-center gap-2"><i class='bx bx-message-rounded-dots'></i> Book with Omar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Gallery -->
   <section class="py-16 px-6 bg-gray-900">
     <h2 class="text-3xl font-bold text-center text-red-600 mb-10">Gallery</h2>
@@ -157,6 +232,42 @@
            class="rounded-xl shadow-lg transform transition hover:scale-105" data-aos="zoom-in" data-aos-delay="400">
       <img src="https://i.postimg.cc/SRQ6TKqs/Screenshot-2025-08-24-at-05-40-38-Instagram.png" 
            class="rounded-xl shadow-lg transform transition hover:scale-105" data-aos="zoom-in" data-aos-delay="600">
+    </div>
+  </section>
+
+  <!-- ===== Spin the Style (Wheel Game) ===== -->
+  <section id="spin" class="py-16 px-6 bg-gradient-to-b from-gray-900 to-black">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-red-600">Spin Your Style 🎡</h2>
+      <p class="text-center text-gray-400 mb-8">Try your luck and get a hairstyle suggestion – then book with the right barber.</p>
+
+      <div class="flex flex-col items-center lg:flex-row gap-10 lg:gap-16 justify-center">
+        <!-- Wheel -->
+        <div class="wheel-container" data-aos="zoom-in">
+          <div id="wheel" class="wheel"></div>
+          <div class="wheel-labels" id="wheelLabels"></div>
+          <div class="wheel-pointer"></div>
+        </div>
+
+        <!-- Controls / Result -->
+        <div class="max-w-md w-full">
+          <button id="spinBtn" class="neon-btn w-full py-3 rounded-full text-lg font-semibold flex items-center justify-center gap-2">
+            <i class='bx bx-refresh bx-spin-hover'></i> Spin Now
+          </button>
+
+          <div id="resultCard" class="hidden mt-6 glow-card rounded-2xl p-5 bg-gradient-to-b from-gray-900 to-black border border-gray-800">
+            <div class="flex items-center gap-4">
+              <img id="styleImg" class="w-20 h-20 rounded-xl object-cover border-2 border-red-600" alt="style">
+              <div>
+                <h3 id="styleName" class="text-xl font-semibold"></h3>
+                <p id="styleDesc" class="text-gray-400 text-sm"></p>
+                <p class="mt-1 text-gray-300 text-sm">Suggested barber: <span id="styleBarber" class="text-red-500 font-medium"></span></p>
+              </div>
+            </div>
+            <a id="bookLink" href="#" target="_blank" class="mt-4 inline-flex items-center gap-2 neon-btn px-4 py-2 rounded-full"><i class='bx bx-calendar'></i> Book this style</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -175,6 +286,77 @@
 
   <script>
     AOS.init();
+
+    // ===== Spin Wheel Data =====
+    const styles = [
+      { name: 'Fade', desc: 'Clean sides with a smooth gradient.', img: 'https://i.postimg.cc/zDkpns5v/Screenshot-2025-08-24-at-05-45-21-Instagram.png', barber: 'Lillo' },
+      { name: 'Classic', desc: 'Timeless gentleman look.', img: 'https://i.postimg.cc/sgMcC1WG/Screenshot-2025-08-24-at-05-43-04-Instagram.png', barber: 'Lillo' },
+      { name: 'Beard Trim', desc: 'Shape-up and define the beard.', img: 'https://i.postimg.cc/DZPQPX9H/Screenshot-2025-08-24-at-05-41-31-Instagram.png', barber: 'Ahmed' },
+      { name: 'Skin Fade', desc: 'Ultra clean, skin-level sides.', img: 'https://i.postimg.cc/SRQ6TKqs/Screenshot-2025-08-24-at-05-40-38-Instagram.png', barber: 'Ahmed' },
+      { name: 'Buzz Cut', desc: 'Minimal, sharp and quick.', img: 'https://i.postimg.cc/sgMcC1WG/Screenshot-2025-08-24-at-05-43-04-Instagram.png', barber: 'Ahmed' },
+      { name: 'Mohawk', desc: 'Bold center strip, edgy vibe.', img: 'https://i.postimg.cc/DZPQPX9H/Screenshot-2025-08-24-at-05-41-31-Instagram.png', barber: 'Omar' },
+      { name: 'Afro', desc: 'Natural volume with shape.', img: 'https://i.postimg.cc/SRQ6TKqs/Screenshot-2025-08-24-at-05-40-38-Instagram.png', barber: 'Omar' },
+      { name: 'Crop', desc: 'Textured top, tidy look.', img: 'https://i.postimg.cc/zDkpns5v/Screenshot-2025-08-24-at-05-45-21-Instagram.png', barber: 'Lillo' },
+    ];
+
+    // Build conic gradient wheel and labels
+    const wheel = document.getElementById('wheel');
+    const labelsWrap = document.getElementById('wheelLabels');
+    const seg = 360 / styles.length;
+
+    // Create conic gradient
+    const colors = ['#1f2937','#111827'];
+    const gradientStops = styles.map((_, i) => `${colors[i%2]} ${i*seg}deg ${(i+1)*seg}deg`).join(',');
+    wheel.style.background = `conic-gradient(${gradientStops})`;
+
+    // Create text labels around the wheel
+    styles.forEach((s, i) => {
+      const label = document.createElement('div');
+      label.className = 'label text-gray-200';
+      label.style.transform = `rotate(${i*seg}deg) translateY(-10px)`;
+      label.innerHTML = `<span style="display:inline-block; transform: rotate(${90}deg);">${s.name}</span>`;
+      labelsWrap.appendChild(label);
+    });
+
+    const spinBtn = document.getElementById('spinBtn');
+    const resultCard = document.getElementById('resultCard');
+    const styleName = document.getElementById('styleName');
+    const styleDesc = document.getElementById('styleDesc');
+    const styleImg = document.getElementById('styleImg');
+    const styleBarber = document.getElementById('styleBarber');
+    const bookLink = document.getElementById('bookLink');
+
+    let currentRotation = 0;
+    let spinning = false;
+
+    function spinWheel(){
+      if (spinning) return;
+      spinning = true;
+
+      const index = Math.floor(Math.random() * styles.length);
+
+      // Calculate target angle so the chosen segment lands at the pointer (top / 0deg)
+      const extraTurns = 4 + Math.floor(Math.random()*2); // 4-5 full turns
+      const targetAngle = (360 * extraTurns) + (360 - (index * seg) - seg/2); // center of segment at top
+
+      currentRotation += targetAngle;
+      wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+      // After animation ends (~4s)
+      setTimeout(() => {
+        const chosen = styles[index];
+        styleName.textContent = chosen.name;
+        styleDesc.textContent = chosen.desc;
+        styleImg.src = chosen.img;
+        styleBarber.textContent = chosen.barber;
+        const msg = encodeURIComponent(`Hi, I want to book a ${chosen.name} with ${chosen.barber} from the website spin.`);
+        bookLink.href = `https://wa.me/201145651307?text=${msg}`;
+        resultCard.classList.remove('hidden');
+        spinning = false;
+      }, 4100);
+    }
+
+    spinBtn.addEventListener('click', spinWheel);
   </script>
 </body>
 </html>
